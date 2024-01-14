@@ -31,13 +31,14 @@ export default function Home({ navigation }) {
     const event = await respEvent.json();
     const discover = await respDiscover.json();
     setDiscover(discover[0]);
-    setEvent(event[1]);
-    setLoading(false);
+    setEvent(event[0]);
   };
 
   useEffect(() => {
-    const dataInterval = setInterval(() => fetchData(), 2000);
-    return () => clearInterval(dataInterval);
+    setLoading(true);
+    fetchData().then(res => {
+      setLoading(false);
+    })
   }, []);
   return (
     <ScrollView styles={{ flex: 1 }}>

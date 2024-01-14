@@ -20,44 +20,24 @@ export default function Detail({ route, navigation }) {
   const [loading, setLoading] = useState(true);
   const { myParam } = route.params;
   const width = useWindowDimensions().width;
-  const fetchData = () => {
-    const data = myParam;
-    setData(data);
-    setLoading(false);
-  };
   const renderers = {
     iframe: IframeRenderer,
   };
   const customHTMLElementModels = {
     iframe: iframeModel,
   };
-  const config = {
-    WebView: WebView,
-    customHTMLElementModels: {
-      iframe: HTMLSource,
-    },
-    renderers: {
-      iframe: ({ src }) => (
-        <WebView
-          source={{ uri: src }}
-          allowFullScreen={true}
-          style={{ height: 200 }}
-        />
-      ),
-    },
-  };
   useEffect(() => {
-    const dataInterval = setInterval(() => fetchData(), 2000);
-    return () => clearInterval(dataInterval);
+    setLoading(true);
+    const data = myParam;
+    setData(data);
+    setLoading(false);
   }, []);
 
   return (
     <NativeBaseProvider>
       <View style={styles.topBar}>
         <View style={styles.leftContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-          >
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <FontAwesomeIcon icon={faArrowLeft} color="#000000" size={24} />
           </TouchableOpacity>
         </View>
@@ -79,7 +59,6 @@ export default function Detail({ route, navigation }) {
                   renderers={renderers}
                   source={{ html: data.content.rendered }}
                   customHTMLElementModels={customHTMLElementModels}
-                  config={config}
                 />
               </View>
             </>
@@ -91,15 +70,13 @@ export default function Detail({ route, navigation }) {
 }
 const styles = StyleSheet.create({
   leftContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "flex-start",
+    marginTop: 40,
   },
   topBar: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    height: 80,
+    height: 100,
     backgroundColor: "#FFFFFF",
     borderBottomWidth: 1,
     borderBottomColor: "#E0E0E0",

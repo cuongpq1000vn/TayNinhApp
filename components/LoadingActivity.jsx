@@ -6,7 +6,6 @@ export default function LoadingActivity() {
         justifyContent: "center",
         alignItems: "center",
         flex: 1,
-        height: Dimensions.get("window").height - 100,
       }}
     >
       <ActivityIndicator size="large" color="#0000ff" />

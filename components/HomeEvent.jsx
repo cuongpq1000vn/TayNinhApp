@@ -8,12 +8,12 @@ import {
 } from "react-native";
 export default function HomeEvent({ props }) {
   const navigation = useNavigation();
-  function sendData(data) {
-    navigation.navigate("Detail", { myParam: data });
+  function sendData() {
+    navigation.navigate("Detail", { myParam: props });
   }
   return (
     <View style={styles.new_wraper}>
-      <Pressable onPress={() => sendData(props)} style={{ width: "100%" }}>
+      <Pressable onPress={() => sendData()} style={{ width: "100%" }}>
         <ImageBackground
           source={{
             uri: props.thumb_url,
